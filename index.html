@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chetan Tirumani | AI/ML Engineer & Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Chetan Tirumani, B.Tech CSE student specializing in AI/ML engineering, deep learning, computer vision, and modern full-stack web development.">
+  
+  <!-- React 18 & ReactDOM 18 CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Babel Standalone for JSX compilation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              50: '#F5F5F7',
+              100: '#E4E4E7',
+              900: '#09090B',
+              950: '#030303',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.7', transform: 'scale(1)' },
+              '50%': { opacity: '0.85', transform: 'scale(1.05)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFFFFF;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E4E4E7;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4D4D8;
+    }
+
+    /* Selection */
+    ::selection {
+      background-color: #09090B;
+      color: #FFFFFF;
+    }
+
+    /* Glassmorphism custom classes */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.015),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(244, 244, 245, 0.9);
+      box-shadow: 
+        0 10px 40px -10px rgba(0, 0, 0, 0.02),
+        0 1px 1px rgba(0, 0, 0, 0.01),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    
+    .glass-card-hover {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .glass-card-hover:hover {
+      transform: translateY(-4px) scale(1.005);
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(9, 9, 11, 0.1);
+      box-shadow: 
+        0 30px 60px -15px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .glass-badge {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(228, 228, 231, 0.7);
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(244, 244, 245, 0.8);
+    }
+
+    /* Headings and body wrapping guidelines */
+    h1, h2, h3, h4 {
+      text-wrap: balance;
+    }
+    p, li {
+      text-wrap: pretty;
+    }
+
+    /* Reveal animations controlled via React states */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Background pattern */
+    .bg-grid-pattern {
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(9, 9, 11, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(9, 9, 11, 0.015) 1px, transparent 1px);
+    }
+
+    /* Reflection Card Shimmer */
+    .shimmer-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 55%
+      );
+      transform: rotate(45deg);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .shimmer-card:hover::after {
+      transform: translate(50%, 50%) rotate(45deg);
+    }
+  </style>
+</head>
+<body class="bg-[#FCFCFD] text-neutral-800 font-sans antialiased relative min-h-screen">
+
+  <div id="root"></div>
+
+  <!-- React Script -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // Canvas Neural Net Background Component
+    const ParticleNetwork = () => {
+      const canvasRef = useRef(null);
+      
+      useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+        let particles = [];
+        const particleCount = 40;
+        
+        const resizeCanvas = () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        };
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            radius: Math.random() * 1.5 + 1
+          });
+        }
+        
+        const animate = () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = 'rgba(9, 9, 11, 0.06)';
+          ctx.strokeStyle = 'rgba(9, 9, 11, 0.025)';
+          
+          particles.forEach((p, idx) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            for (let j = idx + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+              if (dist < 130) {
+                ctx.lineWidth = (1 - dist / 130) * 0.45;
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          });
+          
+          animationFrameId = requestAnimationFrame(animate);
+        };
+        
+        animate();
+        
+        return () => {
+          window.removeEventListener('resize', resizeCanvas);
+          cancelAnimationFrame(animationFrameId);
+        };
+      }, []);
+      
+      return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-0 opacity-70" />;
+    };
+
+    // Cursor Follower glow sphere
+    const MouseGlow = () => {
+      const [mousePos, setMousePos] = useState({ x: -200, y: -200 });
+      const [targetPos, setTargetPos] = useState({ x: -200, y: -200 });
+      
+      useEffect(() => {
+        const handleMouseMove = (e) => {
+          setTargetPos({ x: e.clientX, y: e.clientY });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+      }, []);
+
+      useEffect(() => {
+        let frameId;
+        const ease = 0.06;
+        
+        const updatePosition = () => {
+          setMousePos(prev => {
+            const dx = targetPos.x - prev.x;
+            const dy = targetPos.y - prev.y;
+            return {
+              x: prev.x + dx * ease,
+              y: prev.y + dy * ease
+            };
+          });
+          frameId = requestAnimationFrame(updatePosition);
+        };
+        
+        updatePosition();
+        return () => cancelAnimationFrame(frameId);
+      }, [targetPos]);
+      
+      return (
+        <div 
+          className="fixed pointer-events-none z-10 w-[250px] h-[250px] rounded-full bg-violet-100/15 filter blur-[70px]"
+          style={{
+            left: `${mousePos.x - 125}px`,
+            top: `${mousePos.y - 125}px`,
+            transform: 'translate3d(0, 0, 0)'
+          }}
+        />
+      );
+    };
+
+    // Morphing Typewriter effect in Hero Section
+    const MorphingHeadline = () => {
+      const titles = ["AI/ML Systems.", "Computer Vision.", "Generative AI.", "Neural Architectures."];
+      const [index, setIndex] = useState(0);
+      const [subIndex, setSubIndex] = useState(0);
+      const [reverse, setReverse] = useState(false);
+      
+      useEffect(() => {
+        if (subIndex === titles[index].length + 1 && !reverse) {
+          setTimeout(() => setReverse(true), 2000);
+          return;
+        }
+        
+        if (subIndex === 0 && reverse) {
+          setReverse(false);
+          setIndex((prev) => (prev + 1) % titles.length);
+          return;
+        }
+        
+        const timeout = setTimeout(() => {
+          setSubIndex((prev) => prev + (reverse ? -1 : 1));
+        }, reverse ? 30 : 70);
+        
+        return () => clearTimeout(timeout);
+      }, [subIndex, reverse, index]);
+      
+      return (
+        <span className="border-r-2 border-neutral-800 pr-1 animate-pulse font-bold text-neutral-900">
+          {titles[index].substring(0, subIndex)}
+        </span>
+      );
+    };
+
+    function App() {
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [activeSection, setActiveSection] = useState('hero');
+      const [selectedProject, setSelectedProject] = useState(null);
+      const [formStatus, setFormStatus] = useState('idle');
+      const [visibleSections, setVisibleSections] = useState({});
+
+      useEffect(() => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setVisibleSections((prev) => ({ ...prev, [entry.target.id]: true }));
+              }
+            });
+          },
+          { threshold: 0.05 }
+        );
+
+        const targets = document.querySelectorAll('section[id]');
+        targets.forEach((target) => observer.observe(target));
+
+        const handleScroll = () => {
+          let current = 'hero';
+          targets.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 160) {
+              current = section.getAttribute('id');
+            }
+          });
+          setActiveSection(current);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        
+        return () => {
+          targets.forEach((target) => observer.unobserve(target));
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+
+      const handleContactSubmit = (e) => {
+        e.preventDefault();
+        setFormStatus('submitting');
+        setTimeout(() => {
+          setFormStatus('success');
+          e.target.reset();
+        }, 800);
+      };
+
+      const projectSpecs = {
+        'project-stress': {
+          title: "Facial Expression & Eye-Gaze Stress Analysis",
+          content: (
+            <div className="space-y-4">
+              <div>
+                <h5 className="text-xs font-bold uppercase tracking-widest text-neutral-400">Project Overview</h5>
+                <p className="text-sm text-neutral-600 mt-1 leading-relaxed">
+                  An advanced AI-powered pipeline developed to detect, monitor, and catalog physiological stress markers in users dynamically, using deep convolutional features and facial keypoints.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 border-y border-neutral-100 py-4 my-4">
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">Core Architecture</span>
+                  <span className="text-sm font-semibold text-neutral-800">MobileNetV3 + CBAM</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">Target Accuracy</span>
+                  <span className="text-sm font-semibold text-neutral-800">98.0%</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">FaceMesh Pipeline</span>
+                  <span className="text-sm font-semibold text-neutral-800">MediaPipe (468 3D landmarks)</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">Server Stack</span>
+                  <span className="text-sm font-semibold text-neutral-800">Flask, Python, OpenCV</span>
+                </div>
+              </div>
+
+              <div>
+                <h5 className="text-xs font-bold uppercase tracking-widest text-neutral-400">Technical Highlights</h5>
+                <ul className="list-disc list-inside text-sm text-neutral-600 mt-2 space-y-2 leading-relaxed">
+                  <li>Implementation of the Convolutional Block Attention Module (CBAM) to focus weights on eye regions and facial micro-expressions.</li>
+                  <li>Real-time computation of gaze vectors and blink patterns to capture cognitive stress variables.</li>
+                  <li>Lightweight structure suitable for edge deployments and non-invasive behavioral analysis.</li>
+                </ul>
+              </div>
+            </div>
+          )
+        },
+        'project-phishing': {
+          title: "Visual Phishing Attack Website Detection",
+          content: (
+            <div className="space-y-4">
+              <div>
+                <h5 className="text-xs font-bold uppercase tracking-widest text-neutral-400">Project Overview</h5>
+                <p className="text-sm text-neutral-600 mt-1 leading-relaxed">
+                  A security system combining computer vision and machine learning classifiers to assess website authenticity directly from screenshots and visual features, countering brand-spoofing attacks.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 border-y border-neutral-100 py-4 my-4">
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">Methodology</span>
+                  <span className="text-sm font-semibold text-neutral-800">CNN Visual Stacking</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">Base Classifiers</span>
+                  <span className="text-sm font-semibold text-neutral-800">Random Forest & SVM</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">Image Libraries</span>
+                  <span className="text-sm font-semibold text-neutral-800">TensorFlow, OpenCV, Scikit-learn</span>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-400 block">System Type</span>
+                  <span className="text-sm font-semibold text-neutral-800">Lightweight Real-time Detection</span>
+                </div>
+              </div>
+
+              <div>
+                <h5 className="text-xs font-bold uppercase tracking-widest text-neutral-400">Technical Highlights</h5>
+                <ul className="list-disc list-inside text-sm text-neutral-600 mt-2 space-y-2 leading-relaxed">
+                  <li>Feature extraction pipeline converting browser render streams into low-dimensional CNN representations.</li>
+                  <li>Stacking architecture optimizing classifier weights to minimize false positives on trusted layouts.</li>
+                  <li>Image preprocessing optimizations ensuring responsive visual evaluation under 500ms.</li>
+                </ul>
+              </div>
+            </div>
+          )
+        }
+      };
+
+      return (
+        <div className="relative min-h-screen overflow-hidden">
+          
+          {/* AI Canvas Background */}
+          <ParticleNetwork />
+
+          {/* Mouse Follower Halo */}
+          <MouseGlow />
+          
+          <div className="absolute inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+
+          {/* Navigation Bar */}
+          <nav className="fixed top-0 inset-x-0 z-50 glass-nav transition-all duration-300">
+            <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+              <a href="#hero" className="group flex items-center gap-2">
+                <span className="font-display font-bold text-lg tracking-wider text-neutral-900 uppercase">Chetan Tirumani</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 transition-transform group-hover:scale-150"></span>
+              </a>
+
+              <div className="hidden md:flex items-center gap-8">
+                {['about', 'experience', 'projects', 'skills', 'certifications'].map((section) => (
+                  <a
+                    key={section}
+                    href={`#${section}`}
+                    className={`text-sm font-medium transition-colors capitalize ${
+                      activeSection === section ? 'text-neutral-900 font-semibold border-b-2 border-neutral-900' : 'text-neutral-500 hover:text-neutral-900'
+                    }`}
+                  >
+                    {section}
+                  </a>
+                ))}
+                <a href="#contact" className="px-5 py-2 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white text-xs font-semibold tracking-wide transition-all shadow-md shadow-neutral-950/10">
+                  Get In Touch
+                </a>
+              </div>
+
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 text-neutral-600 hover:text-neutral-950 focus:outline-none transition-colors"
+                aria-label="Toggle Menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div className={`md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-neutral-100 py-6 px-6 flex flex-col gap-5 shadow-lg transition-all duration-300 ${
+              mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
+            }`}>
+              {['about', 'experience', 'projects', 'skills', 'certifications'].map((section) => (
+                <a
+                  key={section}
+                  href={`#${section}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-base font-medium text-neutral-600 hover:text-neutral-950 capitalize"
+                >
+                  {section}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center py-3 rounded-full bg-neutral-950 text-white text-sm font-medium"
+              >
+                Get In Touch
+              </a>
+            </div>
+          </nav>
+
+          <main className="max-w-6xl mx-auto px-6 relative z-10 pt-20">
+            
+            {/* Hero Section */}
+            <section id="hero" className="min-h-[85vh] flex flex-col justify-center py-20 relative">
+              <div className="max-w-3xl space-y-8 animate-slide-up">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-badge">
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-600">Actively Seeking AI/ML Roles</span>
+                </div>
+
+                <div className="space-y-4">
+                  <h1 className="font-display text-5xl sm:text-7xl font-extrabold tracking-tight text-neutral-900 leading-[1.08]">
+                    Pioneering the Next Wave of <br />
+                    <MorphingHeadline />
+                  </h1>
+                  <p className="font-display text-xl sm:text-2xl font-light text-neutral-500">
+                    Hi, I'm <strong className="font-semibold text-neutral-950">Chetan Tirumani</strong>. I build intelligent computer vision models and full-stack solutions.
+                  </p>
+                </div>
+
+                <p className="text-base sm:text-lg text-neutral-500 leading-relaxed max-w-2xl font-light">
+                  A Computer Science and Engineering student at GITAM University specializing in machine learning, deep neural architectures, and custom generative AI integrations. Ready to build robust models that drive intelligent automation.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-4 pt-4">
+                  <a href="#contact" className="px-8 py-4 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white font-medium text-sm tracking-wide transition-all shadow-lg shadow-neutral-950/15 hover:shadow-neutral-950/25 hover:-translate-y-0.5 duration-300">
+                    Discuss AI Opportunities
+                  </a>
+                  <a href="#projects" className="px-8 py-4 rounded-full glass-panel hover:bg-white text-neutral-800 font-medium text-sm tracking-wide border border-neutral-200 transition-all hover:-translate-y-0.5 duration-300">
+                    See AI & ML Works
+                  </a>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-16 border-t border-neutral-100 mt-20">
+                <div>
+                  <div className="text-3xl font-bold font-display text-neutral-900">98%</div>
+                  <div className="text-xs uppercase tracking-wider text-neutral-400 mt-1 font-semibold">Stress Model Accuracy</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold font-display text-neutral-900">Nov '25</div>
+                  <div className="text-xs uppercase tracking-wider text-neutral-400 mt-1 font-semibold">Infosys Dev Experience</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold font-display text-neutral-900">4+</div>
+                  <div className="text-xs uppercase tracking-wider text-neutral-400 mt-1 font-semibold">Industry Credentials</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold font-display text-neutral-900">B.Tech</div>
+                  <div className="text-xs uppercase tracking-wider text-neutral-400 mt-1 font-semibold">Computer Science (CSE)</div>
+                </div>
+              </div>
+            </section>
+
+            {/* About & AI Focus Area Section */}
+            <section id="about" className={`py-24 border-t border-neutral-100 reveal ${visibleSections['about'] ? 'active' : ''}`}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                
+                <div className="lg:col-span-4 space-y-6">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">01 / Story & Target</h2>
+                  <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-neutral-900">Dedicated Focus on AI Opportunities</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed font-light">
+                    My engineering objective is centered on integrating machine learning models into live, low-latency business environments. I am actively looking for AI Engineer, ML Engineer, and Research assistant roles where I can apply my attention-model and optimization skills.
+                  </p>
+                  
+                  <div className="p-6 rounded-2xl glass-card border border-neutral-200/50 space-y-3">
+                    <div className="text-xs font-bold text-neutral-900 uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
+                      AI Target Domains
+                    </div>
+                    <ul className="space-y-2 text-xs text-neutral-600 font-medium">
+                      <li className="flex items-center gap-2">
+                        <span className="text-indigo-500">✓</span> Computer Vision (CV) Systems
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-indigo-500">✓</span> Generative AI (LLMs & RAG)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="text-indigo-500">✓</span> Multi-Agent Orchestrations
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-8 space-y-12 relative">
+                  <div className="absolute left-4 top-2 bottom-2 w-[1px] bg-neutral-200"></div>
+
+                  {/* GITAM */}
+                  <div className="relative pl-12 group">
+                    <div className="absolute left-[11px] top-1.5 w-[11px] h-[11px] rounded-full bg-[#FCFCFD] border-2 border-neutral-800 transition-all group-hover:bg-neutral-800 group-hover:scale-125 z-10"></div>
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h4 className="font-display font-bold text-neutral-900 text-lg">GITAM University, Bengaluru</h4>
+                        <span className="text-xs font-semibold text-neutral-400 glass-badge px-3 py-1 rounded-full">2022 – 2026</span>
+                      </div>
+                      <div className="text-sm font-semibold text-neutral-600">Bachelor of Technology in Computer Science and Engineering</div>
+                      <div className="flex items-center gap-2 text-xs font-medium text-neutral-500 pt-1">
+                        <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>CGPA: 7.49 / 10</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Vidwan */}
+                  <div className="relative pl-12 group">
+                    <div className="absolute left-[11px] top-1.5 w-[11px] h-[11px] rounded-full bg-[#FCFCFD] border-2 border-neutral-400 transition-all group-hover:border-neutral-800 group-hover:bg-neutral-800 group-hover:scale-125 z-10"></div>
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h4 className="font-display font-bold text-neutral-900 text-lg">Vidwan Junior College, Guntur</h4>
+                        <span className="text-xs font-semibold text-neutral-400 glass-badge px-3 py-1 rounded-full">2020 – 2022</span>
+                      </div>
+                      <div className="text-sm font-semibold text-neutral-600">11th - 12th Standard</div>
+                      <p className="text-xs text-neutral-500">Andhra Pradesh State Board of Intermediate Education</p>
+                      <div className="flex items-center gap-2 text-xs font-medium text-neutral-500 pt-1">
+                        <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Percentage: 74.5%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bhashyam */}
+                  <div className="relative pl-12 group">
+                    <div className="absolute left-[11px] top-1.5 w-[11px] h-[11px] rounded-full bg-[#FCFCFD] border-2 border-neutral-400 transition-all group-hover:border-neutral-800 group-hover:bg-neutral-800 group-hover:scale-125 z-10"></div>
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h4 className="font-display font-bold text-neutral-900 text-lg">Bhashyam High School, Guntur</h4>
+                        <span className="text-xs font-semibold text-neutral-400 glass-badge px-3 py-1 rounded-full">2020</span>
+                      </div>
+                      <div className="text-sm font-semibold text-neutral-600">10th Class (Board of Secondary Education AP)</div>
+                      <div className="flex items-center gap-2 text-xs font-medium text-neutral-500 pt-1">
+                        <svg className="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Percentage: 94.5%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            {/* Experience Section */}
+            <section id="experience" className={`py-24 border-t border-neutral-100 reveal ${visibleSections['experience'] ? 'active' : ''}`}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div className="lg:col-span-4 space-y-4">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">02 / Experience</h2>
+                  <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-neutral-900">Industry Exposure & Impact</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed font-light">
+                    My experience at Infosys Springboard enabled me to apply computer science theory to professional applications. Collaborating in active environments shaped my understanding of scalable system design.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-8">
+                  <div className="glass-card shimmer-card rounded-3xl p-8 md:p-10 space-y-6 relative overflow-hidden group border border-neutral-100 hover:border-neutral-200 transition-all duration-300">
+                    <div className="absolute top-0 inset-x-0 h-1 bg-neutral-900 opacity-80"></div>
+                    
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="text-xs font-bold text-neutral-400 uppercase tracking-widest">Internship</div>
+                        <h4 className="font-display text-2xl font-bold text-neutral-900">Full Stack Developer Intern</h4>
+                        <div className="text-sm font-medium text-neutral-600">Infosys Springboard</div>
+                      </div>
+                      <span className="text-xs font-semibold text-neutral-500 glass-badge px-4 py-2 rounded-full">Nov 2025 – Jan 2026</span>
+                    </div>
+
+                    <ul className="space-y-4 text-sm text-neutral-600 leading-relaxed">
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Worked on a trade finance project for secure document tracking and verification, ensuring structural document integrity.</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Helped in developing document upload and transaction tracking features to support user data management.</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Worked with FastAPI and PostgreSQL for backend API routing, database schema migrations, and optimization.</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Participated actively in team discussions, testing phases, and comprehensive project documentation.</span>
+                      </li>
+                    </ul>
+
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-100">
+                      <span className="text-xs font-medium text-neutral-500 bg-neutral-50 border border-neutral-200 px-3 py-1 rounded-md">FastAPI</span>
+                      <span className="text-xs font-medium text-neutral-500 bg-neutral-50 border border-neutral-200 px-3 py-1 rounded-md">PostgreSQL</span>
+                      <span className="text-xs font-medium text-neutral-500 bg-neutral-50 border border-neutral-200 px-3 py-1 rounded-md">Full Stack</span>
+                      <span className="text-xs font-medium text-neutral-500 bg-neutral-50 border border-neutral-200 px-3 py-1 rounded-md">API Testing</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Projects Section */}
+            <section id="projects" className={`py-24 border-t border-neutral-100 reveal ${visibleSections['projects'] ? 'active' : ''}`}>
+              <div className="space-y-4 mb-16 max-w-xl">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">03 / Works & Projects</h2>
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-neutral-900">Translating Machine Learning Research into Real-Time Systems.</h3>
+                <p className="text-sm text-neutral-500 leading-relaxed font-light">
+                  Each project is a deep dive into neural networks, computer vision algorithms, and backend architectures designed to run with low latency and high accuracy.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                {/* Project Card 1 */}
+                <div className="glass-card glass-card-hover shimmer-card rounded-3xl p-8 flex flex-col justify-between border border-neutral-200/50">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-2xl bg-neutral-900 text-white flex items-center justify-center">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      </div>
+                      <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">98% Accuracy</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="font-display text-xl font-bold text-neutral-900">Facial Expression and Eye-Gaze Analysis for Stress Detection</h4>
+                      <p className="text-xs uppercase tracking-widest text-neutral-400 font-semibold">Python, TensorFlow, Flask</p>
+                    </div>
+
+                    <ul className="space-y-3 text-sm text-neutral-600 leading-relaxed font-light">
+                      <li className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Developed a real-time stress detection model employing MobileNetV3 architectures and CBAM (Convolutional Block Attention Module) mechanism.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Integrated OpenCV and MediaPipe FaceMesh to construct non-invasive eye-gaze tracking and facial coordinate systems.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-8 border-t border-neutral-100 flex items-center justify-between mt-6">
+                    <button
+                      onClick={() => setSelectedProject('project-stress')}
+                      className="text-xs font-bold text-neutral-900 hover:text-neutral-600 transition-colors uppercase tracking-wider flex items-center gap-1"
+                    >
+                      Read Technical Spec
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Project Card 2 */}
+                <div className="glass-card glass-card-hover shimmer-card rounded-3xl p-8 flex flex-col justify-between border border-neutral-200/50">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="w-10 h-10 rounded-2xl bg-neutral-900 text-white flex items-center justify-center">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <span className="text-xs font-semibold text-neutral-600 bg-neutral-50 border border-neutral-200 px-3 py-1 rounded-full">Hybrid ML Model</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="font-display text-xl font-bold text-neutral-900">Visual Phishing Attack Detection in Websites using ML</h4>
+                      <p className="text-xs uppercase tracking-widest text-neutral-400 font-semibold">CNN, RF, SVM, Stacking</p>
+                    </div>
+
+                    <ul className="space-y-3 text-sm text-neutral-600 leading-relaxed font-light">
+                      <li className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Designed a hybrid phishing detection algorithm utilising CNN for visual feature extraction from website screenshots.</span>
+                      </li>
+                      <li className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 mt-2 shrink-0"></span>
+                        <span>Combined Random Forest and SVM classifiers using stacking techniques to refine website classification accuracy.</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-8 border-t border-neutral-100 flex items-center justify-between mt-6">
+                    <button
+                      onClick={() => setSelectedProject('project-phishing')}
+                      className="text-xs font-bold text-neutral-900 hover:text-neutral-600 transition-colors uppercase tracking-wider flex items-center gap-1"
+                    >
+                      Read Technical Spec
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            {/* Skills Section */}
+            <section id="skills" className={`py-24 border-t border-neutral-100 reveal ${visibleSections['skills'] ? 'active' : ''}`}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div className="lg:col-span-4 space-y-4">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">04 / Expertise</h2>
+                  <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-neutral-900">Technical Competencies</h3>
+                  <p className="text-sm text-neutral-500 leading-relaxed font-light">
+                    I categorize my skillset across programming systems, deep learning foundations, and modern tools to maintain a comprehensive and production-ready toolchain.
+                  </p>
+                </div>
+
+                <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  
+                  <div className="space-y-4">
+                    <h4 className="font-display font-bold text-neutral-900 border-b border-neutral-100 pb-2 text-sm uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                      Programming Languages
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['Python', 'SQL', 'JavaScript'].map(skill => (
+                        <span key={skill} className="text-xs font-medium text-neutral-800 glass-badge px-3 py-1.5 rounded-lg">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="font-display font-bold text-neutral-900 border-b border-neutral-100 pb-2 text-sm uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                      AI/ML Core
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['Machine Learning', 'Deep Learning', 'Computer Vision', 'Generative AI', 'RAG'].map(skill => (
+                        <span key={skill} className="text-xs font-medium text-neutral-800 glass-badge px-3 py-1.5 rounded-lg">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="font-display font-bold text-neutral-900 border-b border-neutral-100 pb-2 text-sm uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                      LLM APIs & Tooling
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['OpenAI', 'Gemini', 'Claude', 'Groq', 'Ollama'].map(skill => (
+                        <span key={skill} className="text-xs font-medium text-neutral-800 glass-badge px-3 py-1.5 rounded-lg">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="font-display font-bold text-neutral-900 border-b border-neutral-100 pb-2 text-sm uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                      Frameworks & Libraries
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['TensorFlow', 'Scikit-learn', 'FastAPI', 'Flask', 'LangChain'].map(skill => (
+                        <span key={skill} className="text-xs font-medium text-neutral-800 glass-badge px-3 py-1.5 rounded-lg">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="font-display font-bold text-neutral-900 border-b border-neutral-100 pb-2 text-sm uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                      Databases
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['PostgreSQL', 'MongoDB'].map(skill => (
+                        <span key={skill} className="text-xs font-medium text-neutral-800 glass-badge px-3 py-1.5 rounded-lg">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="font-display font-bold text-neutral-900 border-b border-neutral-100 pb-2 text-sm uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                      Developer Tools
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['Git', 'Docker', 'Google Colab', 'VS Code / Cursor', 'GitHub Copilot'].map(skill => (
+                        <span key={skill} className="text-xs font-medium text-neutral-800 glass-badge px-3 py-1.5 rounded-lg">{skill}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </section>
+
+            {/* Certifications Section */}
+            <section id="certifications" className={`py-24 border-t border-neutral-100 reveal ${visibleSections['certifications'] ? 'active' : ''}`}>
+              <div className="space-y-4 mb-16 max-w-xl">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">05 / Certifications</h2>
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-neutral-900">Validated Industry Standards</h3>
+                <p className="text-sm text-neutral-500 leading-relaxed font-light">
+                  Credentials that certify my familiarity with enterprise cloud environments, IT systems administration, and AI foundations.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { provider: 'ServiceNow', title: 'Certified System Administrator' },
+                  { provider: 'Salesforce', title: 'Certified AI Associate' },
+                  { provider: 'AWS Academy', title: 'Machine Learning Foundations' },
+                  { provider: 'AICTE', title: 'AI-ML Virtual Internship' }
+                ].map((cert, index) => (
+                  <div key={index} className="glass-card shimmer-card rounded-2xl p-6 border border-neutral-200/40 hover:border-neutral-300 transition-all duration-300 flex flex-col justify-between h-44">
+                    <div className="space-y-3">
+                      <div className="text-xs font-bold uppercase tracking-widest text-neutral-400">{cert.provider}</div>
+                      <h4 className="font-display font-bold text-neutral-900 leading-tight">{cert.title}</h4>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-medium">
+                      <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Verified</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact" className={`py-24 border-t border-neutral-100 reveal ${visibleSections['contact'] ? 'active' : ''}`}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div className="lg:col-span-4 space-y-6">
+                  <div className="space-y-4">
+                    <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">06 / Connect</h2>
+                    <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-neutral-900">Let's talk about building something together.</h3>
+                    <p className="text-sm text-neutral-500 leading-relaxed font-light">
+                      Have an opening on your team, a research collaboration proposal, or just want to chat about AI/ML models? Reach out directly.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 pt-4 border-t border-neutral-100 text-sm">
+                    <a href="mailto:chetantirumani.05@gmail.com" className="flex items-center gap-3 text-neutral-600 hover:text-neutral-950 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-200 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <span className="font-medium">chetantirumani.05@gmail.com</span>
+                    </a>
+
+                    <a href="tel:+918555813695" className="flex items-center gap-3 text-neutral-600 hover:text-neutral-950 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-200 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                      </div>
+                      <span className="font-medium">+91-8555813695</span>
+                    </a>
+
+                    <a href="https://github.com/chetanlol" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-neutral-600 hover:text-neutral-950 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-200 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                        </svg>
+                      </div>
+                      <span className="font-medium">github.com/chetanlol</span>
+                    </a>
+
+                    <a href="https://linkedin.com/in/chetanlol" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-neutral-600 hover:text-neutral-950 transition-colors group">
+                      <div className="w-8 h-8 rounded-lg bg-neutral-50 border border-neutral-200 flex items-center justify-center group-hover:bg-neutral-950 group-hover:text-white transition-colors duration-300">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      </div>
+                      <span className="font-medium">linkedin.com/in/chetanlol</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-8">
+                  <div className="glass-card shimmer-card rounded-3xl p-8 border border-neutral-100">
+                    <form onSubmit={handleContactSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Your Name</label>
+                          <input type="text" required placeholder="e.g. John Doe" className="w-full bg-white/40 border border-neutral-200 focus:border-neutral-900 focus:bg-white rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300" />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Email Address</label>
+                          <input type="email" required placeholder="e.g. john@example.com" className="w-full bg-white/40 border border-neutral-200 focus:border-neutral-900 focus:bg-white rounded-xl px-4 py-3 text-sm focus:outline-none transition-all duration-300" />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Your Message</label>
+                        <textarea rows="5" required placeholder="Describe your project, timeline, or job details..." className="w-full bg-white/40 border border-neutral-200 focus:border-neutral-900 focus:bg-white rounded-xl px-4 py-3 text-sm focus:outline-none resize-none transition-all duration-300"></textarea>
+                      </div>
+
+                      <button type="submit" disabled={formStatus === 'submitting'} className="w-full sm:w-auto px-8 py-4 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white font-medium text-sm tracking-wide transition-all shadow-md shadow-neutral-950/10 hover:shadow-neutral-950/20 duration-300 disabled:opacity-50">
+                        {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
+                      </button>
+                    </form>
+
+                    {formStatus === 'success' && (
+                      <div className="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-100 text-emerald-800 rounded-2xl mt-4 animate-fade-in">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span className="text-sm font-medium">Thank you! Your message was processed successfully.</span>
+                        </div>
+                        <button onClick={() => setFormStatus('idle')} className="text-emerald-500 hover:text-emerald-700">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </main>
+
+          <footer className="border-t border-neutral-100 bg-white/60 backdrop-blur-md relative z-10 py-12">
+            <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-2">
+                <span className="font-display font-bold text-sm tracking-widest text-neutral-900 uppercase">Chetan Tirumani</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+              </div>
+              <div className="text-xs text-neutral-400 font-medium">
+                &copy; 2026 Chetan Tirumani. All rights reserved. Crafted with React state animations and glassmorphism.
+              </div>
+            </div>
+          </footer>
+
+          {selectedProject && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-neutral-950/30 backdrop-blur-md" onClick={() => setSelectedProject(null)}></div>
+              <div className="glass-panel w-full max-w-2xl rounded-3xl overflow-hidden relative z-10 shadow-2xl animate-slide-up border border-white">
+                <div className="flex items-center justify-between p-6 border-b border-neutral-100 bg-white/80">
+                  <h4 className="font-display text-xl font-bold text-neutral-900">
+                    {projectSpecs[selectedProject]?.title || 'Project Specifications'}
+                  </h4>
+                  <button onClick={() => setSelectedProject(null)} className="p-1 rounded-full text-neutral-400 hover:text-neutral-900 hover:bg-neutral-50 transition-all">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="p-8 space-y-6 max-h-[70vh] overflow-y-auto bg-white/40">
+                  {projectSpecs[selectedProject]?.content}
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
